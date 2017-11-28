@@ -11,7 +11,7 @@ module.exports = (env) => {
   const PATHS = {
     app: path.join(__dirname, 'src'),
     dist: path.join(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/assets',
   };
 
   const config = {
@@ -32,6 +32,15 @@ module.exports = (env) => {
               presets: ['env']
             }
           }
+        },
+        {
+          test: /\.(jpe?g|jpg|png|gif|svg)$/,
+          loader: 'url-loader?limit=10000&name=./assets/images/[name].[ext]?[hash:10]',
+          exclude: /node_modules/,
+        },
+        {
+          test: /\.html$/,
+          loader: 'html-withimg-loader'
         }
       ]
     },
